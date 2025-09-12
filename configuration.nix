@@ -36,8 +36,8 @@
   # i18n.defaultLocale = "en_US.UTF-8";
   console = {
     earlySetup = true;
-    font = "ter-v32n";
-    packages = [ pkgs.terminus_font ];
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
     # font = "Lat2-Terminus16";
     keyMap = "sv-latin1";
     # useXkbConfig = true; # use xkb.options in tty.
@@ -86,6 +86,8 @@
     curl
     git
     btop
+    croc
+    w3m
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
