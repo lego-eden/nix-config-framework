@@ -95,6 +95,9 @@
     discord
     fuzzel
   ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.martian-mono
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
