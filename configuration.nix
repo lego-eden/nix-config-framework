@@ -94,6 +94,7 @@
     vscode
     discord
     fuzzel
+    hyprpaper
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
