@@ -36,9 +36,10 @@
   # i18n.defaultLocale = "en_US.UTF-8";
   console = {
     earlySetup = true;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
+    # font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
     packages = with pkgs; [ terminus_font ];
     # font = "Lat2-Terminus16";
+    font = "ter-v32n";
     keyMap = "sv-latin1";
     # useXkbConfig = true; # use xkb.options in tty.
   };
@@ -70,7 +71,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.legoeden = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
