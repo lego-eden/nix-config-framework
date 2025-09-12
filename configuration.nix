@@ -77,6 +77,7 @@
   };
 
   programs.firefox.enable = true;
+  programs.hyprland.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -88,6 +89,10 @@
     btop
     croc
     w3m
+    kitty
+    waybar
+    vscode
+    discord
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
