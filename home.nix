@@ -12,13 +12,14 @@
   # Let Home manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # home.pointerCursor {
-  #   enable = true;
-  #   x11.enable = true;
-  #   gtk.enable = true;
-  #   sway.enable = true;
-  #   hyprcursor.enable = true;
-  #   package = pkgs.bibata-cursors;
-  #   size = 24;
-  # }
+  home.pointerCursor = {
+    enable = true;
+    x11.enable = true;
+    gtk.enable = true;
+    sway.enable = true;
+    hyprcursor.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
 }
