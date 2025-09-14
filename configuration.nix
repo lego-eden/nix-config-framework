@@ -33,12 +33,23 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = let loc = "sv_SE.UTF-8"; in {
+    LC_ADDRESS = loc;
+    LC_IDENTIFICATION = loc;
+    LC_MEASUREMENT = loc;
+    LC_MONETARY = loc;
+    LC_NAME = loc;
+    LC_NUMERIC = loc;
+    LC_PAPER = loc;
+    LC_TELEPHONE = loc;
+    LC_TIME = loc;
+  };
+
   console = {
     earlySetup = true;
     # font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
     packages = with pkgs; [ terminus_font ];
-    # font = "Lat2-Terminus16";
     font = "ter-v32n";
     keyMap = "sv-latin1";
     # useXkbConfig = true; # use xkb.options in tty.
@@ -87,6 +98,10 @@
     hyprlock
     brightnessctl
     fastfetch
+    bibata-cursors
+    dunst
+    grim
+    slurp
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
