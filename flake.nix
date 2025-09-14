@@ -12,11 +12,16 @@
   outputs = inputs@{ self, nixpkgs, systems, home-manager, ... }:
     let
       eachSystem = nixpkgs.lib.genAttrs (import systems);
+      pkgsBySystem = eachSystem (system: import nixpkgs {
+        inherit system;
+        overlays = [ self.overlays.default ];
+      });
     in
   {
     # NOTE: 'nixos' is the default hostname
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit self; };
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
@@ -27,6 +32,9 @@
           }
         ];
       };
+    };
+    overlays.default = final: prev: {
+      scala-latest = prev.callPackage ./packages/scala-latest/scala-latest.nix { };
     };
   };
 }
