@@ -22,4 +22,11 @@
     name = "Bibata-Modern-Classic";
     size = 24;
   };
+
+  gtk = {
+    enable = true;
+    colorScheme = "dark";
+    font.name = "MartianMono Nerd Font";
+    font.size = 14;
+  };
 }
