@@ -5,11 +5,12 @@
     # i.e. nixos-24.11
     # Use `nix flake update` to update the flake to the latest revision of the chosen release channel.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    iio-hyprland.url = "github:JeanSchoeller/iio-hyprland";
     systems.url = "github:nix-systems/default";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = inputs@{ self, nixpkgs, systems, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, iio-hyprland, systems, home-manager, ... }:
     let
       eachSystem = nixpkgs.lib.genAttrs (import systems);
       # pkgsBySystem = eachSystem (system: import nixpkgs {
@@ -35,6 +36,7 @@
     };
     overlays.default = final: prev: {
       scala-latest = prev.callPackage ./packages/scala-latest/scala-latest.nix { };
+      iio-hyprland = prev.callPackage iio-hyprland { };
     };
   };
 }

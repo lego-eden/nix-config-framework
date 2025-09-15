@@ -71,6 +71,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  # Enable hardware subsystems
+  hardware.sensor.iio.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.legoeden = {
     isNormalUser = true;
@@ -104,7 +107,7 @@
     kitty
     waybar
     vscode
-    discord
+    discord-ptb
     fuzzel
     hyprpaper
     hyprlock
@@ -121,6 +124,8 @@
     metals
     jdk21
     wl-clipboard
+    iio-hyprland
+    jq
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
