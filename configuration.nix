@@ -83,6 +83,14 @@
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
 
+  # allow dynamically linking
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      libc
+    ];
+  };
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -107,6 +115,12 @@
     grim
     slurp
     scala-latest
+    scala-cli
+    scalafmt
+    scalafix
+    metals
+    jdk21
+    wl-clipboard
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono

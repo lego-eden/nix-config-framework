@@ -12,10 +12,10 @@
   outputs = inputs@{ self, nixpkgs, systems, home-manager, ... }:
     let
       eachSystem = nixpkgs.lib.genAttrs (import systems);
-      pkgsBySystem = eachSystem (system: import nixpkgs {
-        inherit system;
-        overlays = [ self.overlays.default ];
-      });
+      # pkgsBySystem = eachSystem (system: import nixpkgs {
+      #   inherit system;
+      #   overlays = [ self.overlays.default ];
+      # });
     in
   {
     # NOTE: 'nixos' is the default hostname
