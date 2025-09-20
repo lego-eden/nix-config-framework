@@ -126,6 +126,7 @@
     wl-clipboard
     iio-hyprland
     jq
+    spotify
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
