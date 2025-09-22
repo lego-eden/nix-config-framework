@@ -127,6 +127,7 @@
     iio-hyprland
     jq
     spotify
+    cacert
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
