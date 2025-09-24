@@ -71,6 +71,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
+
   # Enable hardware subsystems
   hardware.sensor.iio.enable = true;
 
@@ -128,6 +131,8 @@
     jq
     spotify
     cacert
+    bluetui
+    tldr
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
