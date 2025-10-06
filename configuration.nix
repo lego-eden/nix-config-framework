@@ -90,12 +90,12 @@
   programs.hyprland.enable = true;
 
   # allow dynamically linking
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      libc
-    ];
-  };
+  # programs.nix-ld = {
+  #   enable = true;
+  #   libraries = with pkgs; [
+  #     libc
+  #   ];
+  # };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -133,6 +133,7 @@
     cacert
     bluetui
     tldr
+    stepmania
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
