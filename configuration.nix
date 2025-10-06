@@ -134,6 +134,7 @@
     bluetui
     tldr
     stepmania
+    rnote
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
