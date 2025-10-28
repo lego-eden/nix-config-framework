@@ -3,15 +3,12 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { self, config, lib, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-  nixpkgs.overlays =
-    [
-      self.overlays.default
+  nixpkgs.overlays = [ self.overlays.default
     ];
   
   nixpkgs.config.allowUnfree = true;
@@ -80,22 +77,34 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.legoeden = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
   };
 
   programs.firefox.enable = true;
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  virtualisation.docker.enable = true;
 
   # allow dynamically linking
   # programs.nix-ld = {
   #   enable = true;
   #   libraries = with pkgs; [
   #     libc
+  #     wayland
+  #     libxkbcommon
   #   ];
   # };
+  
+  # Set environment variables
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -135,7 +144,16 @@
     tldr
     stepmania
     rnote
+    krita
+    jetbrains.idea-community
+    xfce.thunar
+    man
+    man-pages
+    man-pages-posix
+    unzip
+    zip
   ];
+
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
   ];
@@ -143,17 +161,16 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-gtk2;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
+  # services.openssh.enable = true; Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
