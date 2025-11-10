@@ -152,6 +152,7 @@
     man-pages-posix
     unzip
     zip
+    pamixer
   ];
 
   fonts.packages = with pkgs; [
