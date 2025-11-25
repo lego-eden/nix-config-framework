@@ -153,6 +153,8 @@
     unzip
     zip
     pamixer
+    prism
+    timg
   ];
 
   fonts.packages = with pkgs; [
