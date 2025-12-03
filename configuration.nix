@@ -109,7 +109,7 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    # neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     curl
     git
@@ -155,6 +155,7 @@
     pamixer
     prism
     timg
+    gh
   ];
 
   fonts.packages = with pkgs; [

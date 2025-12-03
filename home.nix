@@ -1,5 +1,15 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  fromGitHub = ref: repo: pkgs.vimUtils.buildVimPlugin {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = ref;
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      ref = ref;
+    };
+  };
+in
 {
   # Home manager nees a bit of information about you and the paths it should manage
   home.username = "legoeden";
@@ -28,5 +38,22 @@
     colorScheme = "dark";
     font.name = "MartianMono Nerd Font";
     font.size = 14;
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    plugins = with pkgs.vimPlugins; [
+      nvim-lspconfig
+      nvim-treesitter.withAllGrammars
+      catppuccin-nvim
+      snacks-nvim
+      nvim-metals
+      blink-cmp
+    ];
+    extraLuaConfig = lib.fileContents ./nvim/init.lua;
   };
 }
