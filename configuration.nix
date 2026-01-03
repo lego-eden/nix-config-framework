@@ -68,9 +68,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  services.udisks2.enable = true;
-  services.gvfs.enable = true;
-  services.devmon.enable = true;
+  # services.udisks2.enable = true;
+  # services.gvfs.enable = true;
+  # services.devmon.enable = true;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
@@ -149,9 +149,9 @@
     stepmania
     rnote
     krita
-    jetbrains.idea-community
-    xfce.thunar
-    xfce.thunar-volman
+    jetbrains.idea-oss
+    thunar
+    thunar-volman
     man
     man-pages
     man-pages-posix
