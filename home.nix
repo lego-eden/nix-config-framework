@@ -33,11 +33,22 @@ in
     size = 24;
   };
 
-  gtk = {
+  gtk =
+    let
+      extraCss = ''
+        * {
+          font-weight: 600; 
+        }
+      '';
+    in {
     enable = true;
     colorScheme = "dark";
-    font.name = "MartianMono Nerd Font";
-    font.size = 14;
+    # font.name = "MartianMono Nerd Font";
+    font.name = "Annotation Mono";
+    font.size = 16;
+    
+    gtk3.extraCss = extraCss;
+    gtk4.extraCss = extraCss;
   };
 
   programs.neovim = {
@@ -53,6 +64,7 @@ in
       snacks-nvim
       nvim-metals
       blink-cmp
+      rustaceanvim
     ];
     extraLuaConfig = lib.fileContents ./nvim/init.lua;
   };

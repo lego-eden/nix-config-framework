@@ -9,9 +9,11 @@ vim.keymap.set('o', 'ö', '[', {})
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>', {})
 vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, {})
 vim.keymap.set('n', '<leader>d', function()
-  vim.diagnostic.open_float({})
-end, {})
-vim.keymap.set('n', '<Leader>a', vim.lsp.buf.code_action, {})
+  vim.diagnostic.open_float({}) end, {})
+vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, {})
+vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {})
+vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', "K", ":m '>-2<CR>gv=gv")
 
 vim.cmd.colorscheme('catppuccin')
 
@@ -21,11 +23,13 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smarttab = true
+vim.opt.smartindent = true
 vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.wrap = false
 vim.opt.winborder = 'rounded'
 vim.opt.linebreak = true
+vim.opt.swapfile = false
 
 -- Sync clipboard
 vim.schedule(function()
@@ -90,3 +94,31 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   group = nvim_metals_group,
 })
+
+-- Setup rustacean
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {
+  },
+  -- LSP configuration
+  server = {
+    on_attach = function(client, bufnr)
+      vim.keymap.set('n', '<leader>a', function()
+        vim.cmd.RustLsp('codeaction')
+      end, {})
+
+      vim.keymap.set('n', 'K', function()
+        vim.cmd.RustLsp({'hover', 'actions'})
+      end, {})
+    end,
+    default_settings = {
+      -- rust-analyzer language server configuration
+      ['rust-analyzer'] = {
+      },
+    },
+  },
+  -- DAP configuration
+  dap = {
+  },
+}
+require('rustaceanvim')

@@ -68,6 +68,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
+  services.devmon.enable = true;
+
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
@@ -147,6 +151,7 @@
     krita
     jetbrains.idea-community
     xfce.thunar
+    xfce.thunar-volman
     man
     man-pages
     man-pages-posix
@@ -160,6 +165,7 @@
 
   fonts.packages = with pkgs; [
     nerd-fonts.martian-mono
+    annotation-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
