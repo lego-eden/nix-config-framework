@@ -78,6 +78,9 @@
   # Enable hardware subsystems
   hardware.sensor.iio.enable = true;
 
+  # Enable polkit to allow apps to elevate privilages
+  security.polkit.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.legoeden = {
     isNormalUser = true;
