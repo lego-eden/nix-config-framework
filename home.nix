@@ -59,13 +59,22 @@ in
     vimdiffAlias = true;
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
-      nvim-treesitter.withAllGrammars
+      nvim-treesitter
       catppuccin-nvim
       snacks-nvim
       nvim-metals
       blink-cmp
       rustaceanvim
     ];
-    extraLuaConfig = lib.fileContents ./nvim/init.lua;
+    extraLuaConfig = ''
+      vim.opt.runtimepath:append("${pkgs.vimPlugins.nvim-treesitter.withAllGrammars}/runtime")
+      ${lib.fileContents ./nvim/init.lua}
+    '';
+    extraPackages = with pkgs; [
+      gcc
+      gnumake
+      tree-sitter
+      nodejs
+    ];
   };
 }

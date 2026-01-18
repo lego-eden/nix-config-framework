@@ -49,8 +49,21 @@ vim.keymap.set('n', "<leader>n", function() Snacks.picker.notifications() end, {
 vim.keymap.set('n', "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
 
 -- Setup treesitter
-require('nvim-treesitter.configs').setup({
-  highlight = { enable = true },
+local ts = require('nvim-treesitter')
+local tslangs = { 'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript', 'zig', 'haskell', 'toml' }
+-- local tslangs = { 'all' }
+ts.install(tslangs)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = tslangs,
+  callback = function()
+    -- syntax highlighting, provided by Neovim
+    vim.treesitter.start()
+    -- folds, provided by Neovim
+    -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    -- vim.wo.foldmethod = 'expr'
+    -- indentation, provided by nvim-treesitter
+    -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
 
 -- Setup blink.cmp
