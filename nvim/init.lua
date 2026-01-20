@@ -50,7 +50,7 @@ vim.keymap.set('n', "<leader>e", function() Snacks.explorer() end, { desc = "Fil
 
 -- Setup treesitter
 local ts = require('nvim-treesitter')
-local tslangs = { 'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript', 'zig', 'haskell', 'toml' }
+local tslangs = { 'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript', 'zig', 'haskell', 'toml', 'python' }
 -- local tslangs = { 'all' }
 ts.install(tslangs)
 vim.api.nvim_create_autocmd('FileType', {
@@ -65,6 +65,9 @@ vim.api.nvim_create_autocmd('FileType', {
     -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
+
+-- Setup fidget to have metals not interrupt the user
+require('fidget').setup({})
 
 -- Setup blink.cmp
 require('blink.cmp').setup({
@@ -95,15 +98,32 @@ require('blink.cmp').setup({
   fuzzy = { implementation = "prefer_rust_with_warning" }
 });
 
--- Setup lspconfig
-local lspconfig = require('lspconfig')
+-- Setup zls
+vim.lsp.config("zls", {
+  -- cmd = { "zls" },
+  -- filetypes = { "zig", "zir" },
+  -- root_dir = lspconfig.util.root_pattern("build.zig", ".git") or vim.loop.cwd,
+})
+vim.lsp.enable("zls")
+
+-- Setup python
+vim.lsp.config("pylsp", {})
+vim.lsp.enable("pylsp")
+
+-- Setup C LSP
+vim.lsp.config("clangd", {})
+vim.lsp.enable("clangd")
 
 -- Setup metals
 local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "scala", "sbt", "mill", "sc" },
   callback = function()
-    require("metals").initialize_or_attach({})
+    require("metals").initialize_or_attach({
+      init_options = {
+        statusBarProvider = "off",
+      },
+    })
   end,
   group = nvim_metals_group,
 })
@@ -134,4 +154,13 @@ vim.g.rustaceanvim = {
   dap = {
   },
 }
+
+-- setup LSP stuff
 require('rustaceanvim')
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  end,
+})

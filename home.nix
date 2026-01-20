@@ -65,6 +65,7 @@ in
       nvim-metals
       blink-cmp
       rustaceanvim
+      fidget-nvim
     ];
     extraLuaConfig = ''
       vim.opt.runtimepath:append("${pkgs.vimPlugins.nvim-treesitter.withAllGrammars}/runtime")
@@ -75,6 +76,8 @@ in
       gnumake
       tree-sitter
       nodejs
+      zls
+      python3Packages.python-lsp-server
     ];
   };
 }
