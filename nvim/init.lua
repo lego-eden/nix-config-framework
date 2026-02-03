@@ -50,7 +50,9 @@ vim.keymap.set('n', "<leader>e", function() Snacks.explorer() end, { desc = "Fil
 
 -- Setup treesitter
 local ts = require('nvim-treesitter')
-local tslangs = { 'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript', 'zig', 'haskell', 'toml', 'python' }
+local tslangs = {
+  'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
+  'zig', 'haskell', 'toml', 'python', 'markdown', 'make' }
 -- local tslangs = { 'all' }
 ts.install(tslangs)
 vim.api.nvim_create_autocmd('FileType', {
@@ -113,6 +115,10 @@ vim.lsp.enable("pylsp")
 -- Setup C LSP
 vim.lsp.config("clangd", {})
 vim.lsp.enable("clangd")
+
+-- Setup Java LSP
+vim.lsp.config("jdtls", {})
+vim.lsp.enable("jdtls")
 
 -- Setup metals
 local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })

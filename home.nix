@@ -79,6 +79,7 @@ in
       nodejs
       zls
       python3Packages.python-lsp-server
+      jdt-language-server
     ];
   };
 }
