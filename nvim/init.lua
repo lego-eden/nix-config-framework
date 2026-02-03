@@ -12,6 +12,8 @@ vim.keymap.set('n', '<leader>d', function()
   vim.diagnostic.open_float({}) end, {})
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, {})
 vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {})
+vim.keymap.set('n', '<leader>h', function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {})
 vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', "K", ":m '>-2<CR>gv=gv")
 
@@ -126,8 +128,18 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "scala", "sbt", "mill", "sc" },
   callback = function()
     require("metals").initialize_or_attach({
+      settings = {
+        inlayHints = {
+          hintsInPatternMatch = { enable = true },
+          implicitArguments = { enable = true },
+          implicitConversions = { enable = true },
+          inferredTypes = { enable = true },
+          typeParameters = { enable = true },
+        },
+      },
       init_options = {
         statusBarProvider = "off",
+          byNameParameters = { enable = true },
       },
     })
   end,
@@ -168,5 +180,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { buffer = args.buf }
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  end,
+  end
 })
