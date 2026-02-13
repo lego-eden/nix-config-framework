@@ -152,7 +152,6 @@
     stepmania
     rnote
     krita
-    jetbrains.idea-oss
     thunar
     thunar-volman
     man
@@ -163,6 +162,7 @@
     pamixer
     prism
     timg
+    xournalpp
     gh
   ];
 

@@ -55,7 +55,12 @@ local ts = require('nvim-treesitter')
 local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
   'zig', 'haskell', 'toml', 'python', 'markdown', 'make' }
--- local tslangs = { 'all' }
+vim.filetype.add({
+  extension = {
+    make = "make",
+  },
+})
+
 ts.install(tslangs)
 vim.api.nvim_create_autocmd('FileType', {
   pattern = tslangs,
@@ -69,6 +74,7 @@ vim.api.nvim_create_autocmd('FileType', {
     -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
+
 
 -- Setup fidget to have metals not interrupt the user
 require('fidget').setup({})
@@ -129,6 +135,8 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     require("metals").initialize_or_attach({
       settings = {
+        serverVersion = "2.0.0-M7",
+        serverProperties = { "-Xmx4g" },
         inlayHints = {
           hintsInPatternMatch = { enable = true },
           implicitArguments = { enable = true },
@@ -139,7 +147,7 @@ vim.api.nvim_create_autocmd("FileType", {
       },
       init_options = {
         statusBarProvider = "off",
-          byNameParameters = { enable = true },
+        byNameParameters = { enable = true },
       },
     })
   end,
