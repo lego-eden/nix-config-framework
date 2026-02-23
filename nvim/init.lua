@@ -54,7 +54,8 @@ vim.keymap.set('n', "<leader>e", function() Snacks.explorer() end, { desc = "Fil
 local ts = require('nvim-treesitter')
 local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
-  'zig', 'haskell', 'toml', 'python', 'markdown', 'make' }
+  'zig', 'haskell', 'toml', 'python', 'markdown', 'make',
+  'cpp'}
 vim.filetype.add({
   extension = {
     make = "make",
