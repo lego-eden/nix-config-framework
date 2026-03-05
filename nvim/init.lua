@@ -14,8 +14,6 @@ vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, {})
 vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {})
 vim.keymap.set('n', '<leader>h', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, {})
-vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', "K", ":m '>-2<CR>gv=gv")
 
 vim.cmd.colorscheme('catppuccin')
 
@@ -55,10 +53,10 @@ local ts = require('nvim-treesitter')
 local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
   'zig', 'haskell', 'toml', 'python', 'markdown', 'make',
-  'cpp'}
+  'cpp', 'slang'}
 vim.filetype.add({
   extension = {
-    make = "make",
+    slang = "slang",
   },
 })
 
@@ -122,12 +120,24 @@ vim.lsp.config("pylsp", {})
 vim.lsp.enable("pylsp")
 
 -- Setup C LSP
-vim.lsp.config("clangd", {})
+vim.lsp.config("clangd", {
+  cmd = {
+    "clangd",
+    "--header-insertion=never",
+    "--experimental-modules-support",
+  },
+})
 vim.lsp.enable("clangd")
 
 -- Setup Java LSP
 vim.lsp.config("jdtls", {})
 vim.lsp.enable("jdtls")
+
+-- Setup Slang LSP
+require('slang').setup({
+  auto_format = true,
+  inlay_hints = true,
+})
 
 -- Setup metals
 local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })

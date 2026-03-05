@@ -48,8 +48,7 @@
   };
 
   console = {
-    earlySetup = true;
-    # font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
+    earlySetup = false;
     packages = with pkgs; [ terminus_font ];
     font = "ter-v32n";
     keyMap = "sv-latin1";
@@ -57,7 +56,19 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
 
   # Enable sound.
   services.pipewire = {

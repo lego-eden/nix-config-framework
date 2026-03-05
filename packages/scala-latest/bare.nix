@@ -8,12 +8,12 @@
 }:
 
 stdenv.mkDerivation (finalAttrs: {
-  version = "3.8.1";
+  version = "3.8.2";
   pname = "scala-bare";
 
   src = fetchurl {
     url = "https://github.com/scala/scala3/releases/download/${finalAttrs.version}/scala3-${finalAttrs.version}.tar.gz";
-    hash = "sha256-6RdU/L3zUQE7uiC7T1q8TptJCoMnKxk84CLXQ9Q0Ao8=";
+    hash = "sha256-gnNWp4pw09eS8ad+EJzD+j6pRrjSaEi7JF8nW+Uv144=";
   };
 
   propagatedBuildInputs = [

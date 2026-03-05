@@ -9,6 +9,17 @@ let
       ref = ref;
     };
   };
+  slang-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "slang.nvim";
+    version = "0.1.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "pixelsandpointers";
+      repo = "slang.nvim";
+      tag = "0.1.0";
+      hash = "sha256-xZNIG3Z9XpJpkDN6eww/ynZ9feU//yyDieub2Rm3Qv4=";
+    };
+    meta.description = "Slang LSP support for Neovim";
+  };
 in
 {
   # Home manager nees a bit of information about you and the paths it should manage
@@ -66,6 +77,7 @@ in
       blink-cmp
       rustaceanvim
       fidget-nvim
+      slang-nvim
     ];
     extraLuaConfig = ''
       vim.opt.runtimepath:append("${pkgs.vimPlugins.nvim-treesitter.withAllGrammars}/runtime")
@@ -80,6 +92,7 @@ in
       zls
       python3Packages.python-lsp-server
       jdt-language-server
+      shader-slang
     ];
   };
 }
