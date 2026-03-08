@@ -18,8 +18,8 @@ vim.keymap.set('n', '<leader>h', function()
 vim.cmd.colorscheme('catppuccin')
 
 -- Options
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.relativenumber = false
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smarttab = true
@@ -30,6 +30,9 @@ vim.opt.wrap = false
 vim.opt.winborder = 'rounded'
 vim.opt.linebreak = true
 vim.opt.swapfile = false
+vim.diagnostic.config({
+  signs = false,
+})
 
 -- Sync clipboard
 vim.schedule(function()
@@ -74,6 +77,13 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Setup markdown specific settings
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function()
+    vim.opt.wrap = true
+  end,
+})
 
 -- Setup fidget to have metals not interrupt the user
 require('fidget').setup({})
@@ -174,7 +184,7 @@ vim.g.rustaceanvim = {
   server = {
     on_attach = function(client, bufnr)
       vim.keymap.set('n', '<leader>a', function()
-        vim.cmd.RustLsp('codeaction')
+        vim.cmd.RustLsp('codeAction')
       end, {})
 
       vim.keymap.set('n', 'K', function()
