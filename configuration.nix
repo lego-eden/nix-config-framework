@@ -155,7 +155,6 @@
     bluetui
     tldr
     stepmania
-    rnote
     krita
     thunar
     thunar-volman
@@ -169,6 +168,7 @@
     timg
     xournalpp
     gh
+    obs-studio
   ];
 
   fonts.packages = with pkgs; [
