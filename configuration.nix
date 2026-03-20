@@ -169,6 +169,7 @@
     xournalpp
     gh
     obs-studio
+    prismlauncher
   ];
 
   fonts.packages = with pkgs; [

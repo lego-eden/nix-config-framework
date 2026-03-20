@@ -56,7 +56,8 @@ local ts = require('nvim-treesitter')
 local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
   'zig', 'haskell', 'toml', 'python', 'markdown', 'make',
-  'cpp', 'slang'}
+  'cpp', 'slang', 'nix'
+}
 vim.filetype.add({
   extension = {
     slang = "slang",
