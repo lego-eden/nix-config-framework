@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, catppuccin, ... }:
 
 let
   fromGitHub = ref: repo: pkgs.vimUtils.buildVimPlugin {
@@ -59,7 +59,38 @@ in
     font.size = 16;
     
     gtk3.extraCss = extraCss;
+    gtk3.iconTheme.package = pkgs.adwaita-icon-theme;
+    gtk3.iconTheme.name = "adwaita";
+
     gtk4.extraCss = extraCss;
+    gtk4.iconTheme.package = pkgs.adwaita-icon-theme;
+    gtk4.iconTheme.name = "adwaita";
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "qtct";
+    style.name = "kvantum";
+  };
+
+  qt.qt5ctSettings = {
+    Fonts = {
+      general = "\"Annotation Mono Demibold,12\"";
+      fixed = "\"Annotation Mono Demibold,12\"";
+    };
+  };
+
+  qt.qt6ctSettings = {
+    Fonts = {
+      general = "\"Annotation Mono Demibold,12\"";
+      fixed = "\"Annotation Mono Demibold,12\"";
+    };
+  };
+
+  catppuccin.kvantum = {
+    enable = true;
+    flavor = "mocha";
+    accent = "flamingo";
   };
 
   programs.neovim = {

@@ -74,7 +74,7 @@
   services.libinput.enable = true;
 
   # services.udisks2.enable = true;
-  # services.gvfs.enable = true;
+  services.gvfs.enable = true;
   # services.devmon.enable = true;
 
   # Enable bluetooth
@@ -170,6 +170,8 @@
     gh
     obs-studio
     prismlauncher
+    batsignal
+    bemoji
   ];
 
   fonts.packages = with pkgs; [
@@ -186,25 +188,6 @@
     enableSSHSupport = true;
   };
 
-  specialisation.kde-test.configuration = {
-    services.displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      settings.General.DisplayServer = "wayland";
-    };
-    services.desktopManager.plasma6.enable = true;
-  };
-
-  specialisation.gnome-test.configuration = {
-    services.displayManager.gdm.enable = true;
-    services.desktopManager.gnome.enable = true;
-
-    # To disable installing GNOME's suite of applications
-    # and only be left with GNOME shell.
-    services.gnome.core-apps.enable = true;
-    services.gnome.core-developer-tools.enable = true;
-    services.gnome.games.enable = true;
-  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

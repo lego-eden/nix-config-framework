@@ -9,8 +9,9 @@
     systems.url = "github:nix-systems/default";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    catppuccin.url = "github:catppuccin/nix";
   };
-  outputs = inputs@{ self, nixpkgs, iio-hyprland, systems, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, iio-hyprland, systems, catppuccin, home-manager, ... }:
     let
       eachSystem = nixpkgs.lib.genAttrs (import systems);
       # pkgsBySystem = eachSystem (system: import nixpkgs {
@@ -29,7 +30,12 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.legoeden = ./home.nix;
+            home-manager.users.legoeden = {
+              imports = [
+                ./home.nix
+                catppuccin.homeModules.catppuccin
+              ];
+            };
           }
         ];
       };

@@ -56,7 +56,7 @@ local ts = require('nvim-treesitter')
 local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
   'zig', 'haskell', 'toml', 'python', 'markdown', 'make',
-  'cpp', 'slang', 'nix'
+  'cpp', 'slang', 'nix', 'gleam'
 }
 vim.filetype.add({
   extension = {
@@ -143,6 +143,10 @@ vim.lsp.enable("clangd")
 -- Setup Java LSP
 vim.lsp.config("jdtls", {})
 vim.lsp.enable("jdtls")
+
+-- Setup Gleam LSP
+vim.lsp.config("gleam", {})
+vim.lsp.enable("gleam")
 
 -- Setup Slang LSP
 require('slang').setup({
