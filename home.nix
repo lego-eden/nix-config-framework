@@ -109,6 +109,7 @@ in
       rustaceanvim
       fidget-nvim
       slang-nvim
+      lualine-nvim
     ];
     extraLuaConfig = ''
       vim.opt.runtimepath:append("${pkgs.vimPlugins.nvim-treesitter.withAllGrammars}/runtime")
