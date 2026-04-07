@@ -168,7 +168,7 @@ local colors = {
   red      = '#f38ba8',
   violet   = '#cba6f7',
   flamingo = '#f2cdcd',
-  grey     = '#1e1e2e',
+  grey     = '#313244',
 }
 
 local bubbles_theme = {
