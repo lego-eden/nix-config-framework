@@ -56,7 +56,8 @@ local ts = require('nvim-treesitter')
 local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
   'zig', 'haskell', 'toml', 'python', 'markdown', 'make',
-  'cpp', 'slang', 'nix', 'gleam'
+  'cpp', 'slang', 'nix', 'gleam', 'bash', 'svelte', 'typescript',
+  'xml',
 }
 vim.filetype.add({
   extension = {
@@ -129,6 +130,8 @@ vim.lsp.enable("zls")
 -- Setup python
 vim.lsp.config("pylsp", {})
 vim.lsp.enable("pylsp")
+vim.lsp.config("pyright", {})
+vim.lsp.enable("pyright")
 
 -- Setup C LSP
 vim.lsp.config("clangd", {
@@ -153,6 +156,16 @@ require('slang').setup({
   auto_format = true,
   inlay_hints = true,
 })
+
+-- Setup web dev stuff
+vim.lsp.config('svelte', {})
+vim.lsp.config('vtsls', {})
+
+vim.lsp.enable('svelte')
+vim.lsp.enable('vtsls')
+
+-- Setup debugger
+require('dap')
 
 -- Setup lualine
 -- Bubbles config for lualine
@@ -226,7 +239,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     require("metals").initialize_or_attach({
       settings = {
-        serverVersion = "2.0.0-M8",
+        serverVersion = "2.0.0-M12",
         serverProperties = { "-Xmx4g" },
         inlayHints = {
           byNameParameters = { enable = true },
@@ -242,6 +255,7 @@ vim.api.nvim_create_autocmd("FileType", {
         byNameParameters = { enable = true },
       },
     })
+    vim.bo.indentexpr = ""
   end,
   group = nvim_metals_group,
 })

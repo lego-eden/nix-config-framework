@@ -21,6 +21,14 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Additional kernel modules
+  boot.kernelModules = [ "uinput" ];
+
+  # udev
+  services.udev.extraRules = ''
+    SUBSYSTEM=="misc", KERNEL=="uinput", OPTIONS+="static_node=uinput", TAG+="uaccess"
+  '';
+
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -100,6 +108,7 @@
     enable = true;
     xwayland.enable = true;
   };
+  programs.steam.enable = true;
 
   virtualisation.docker.enable = true;
 
@@ -172,6 +181,8 @@
     prismlauncher
     batsignal
     bemoji
+    antimicrox
+    hypridle
   ];
 
   fonts.packages = with pkgs; [
@@ -187,6 +198,19 @@
     pinentryPackage = pkgs.pinentry-gtk2;
     enableSSHSupport = true;
   };
+
+  # Enable hibernation support
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "hibernate";
+  services.logind.settings.Login.HandleLidSwitch = "hibernate";
+  boot.kernelParams = ["resume_offset=58840591"];
+  boot.resumeDevice = "/dev/disk/by-uuid/c34b0bb7-187f-4fb2-b7e4-5c902fbea82a";
+  powerManagement.enable = true;
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 48 * 1024;
+    }
+  ];
 
   # List services that you want to enable:
 

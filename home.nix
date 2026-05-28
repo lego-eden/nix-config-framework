@@ -110,6 +110,7 @@ in
       fidget-nvim
       slang-nvim
       lualine-nvim
+      nvim-dap
     ];
     extraLuaConfig = ''
       vim.opt.runtimepath:append("${pkgs.vimPlugins.nvim-treesitter.withAllGrammars}/runtime")
@@ -125,6 +126,9 @@ in
       python3Packages.python-lsp-server
       jdt-language-server
       shader-slang
+      svelte-language-server
+      vtsls
+      pyright
     ];
   };
 }
