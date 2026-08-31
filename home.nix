@@ -112,7 +112,7 @@ in
       lualine-nvim
       nvim-dap
     ];
-    extraLuaConfig = ''
+    initLua = ''
       vim.opt.runtimepath:append("${pkgs.vimPlugins.nvim-treesitter.withAllGrammars}/runtime")
       ${lib.fileContents ./nvim/init.lua}
     '';

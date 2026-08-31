@@ -57,7 +57,7 @@ local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
   'zig', 'haskell', 'toml', 'python', 'markdown', 'make',
   'cpp', 'slang', 'nix', 'gleam', 'bash', 'svelte', 'typescript',
-  'xml',
+  'xml', 'glsl',
 }
 vim.filetype.add({
   extension = {

@@ -79,6 +79,8 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -96,6 +98,9 @@
 
   # Enable polkit to allow apps to elevate privilages
   security.polkit.enable = true;
+
+  # RTKit for audio
+  security.rtkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.legoeden = {
@@ -199,7 +204,7 @@
   # programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry-gtk2;
+    pinentryPackage = pkgs.pinentry-gnome3;
     enableSSHSupport = true;
   };
 
