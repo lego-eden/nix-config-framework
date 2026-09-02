@@ -87,6 +87,9 @@ in
     };
   };
 
+  catppuccin.enable = true;
+  catppuccin.autoEnable = true;
+
   catppuccin.kvantum = {
     enable = true;
     flavor = "mocha";
@@ -99,6 +102,8 @@ in
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+    withPython3 = true;
+    withRuby = true;
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
       nvim-treesitter
