@@ -134,6 +134,12 @@ in
       svelte-language-server
       vtsls
       pyright
+      glsl_analyzer
+      erlang-language-platform
     ];
+  };
+  xdg.configFile."nvim/syntax" = {
+    source = ./nvim/syntax; # Path to a folder in your flake/config repository
+    recursive = true;
   };
 }

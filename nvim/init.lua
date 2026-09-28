@@ -41,7 +41,13 @@ end)
 
 -- Snacks
 require('snacks').setup({
-  picker = { enabled = true },
+  picker = {
+    enabled = true,
+    sources = {
+      smart = { hidden = true, ignored = true },
+      explorer = { hidden = true, ignored = true }
+    }
+  },
   explorer = { enabled = true },
 })
 vim.keymap.set('n', "<leader><space>", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
@@ -49,7 +55,7 @@ vim.keymap.set('n', "<leader>,", function() Snacks.picker.buffers() end, { desc 
 vim.keymap.set('n', "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
 vim.keymap.set('n', "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" })
 vim.keymap.set('n', "<leader>n", function() Snacks.picker.notifications() end, { desc = "Notification History" })
-vim.keymap.set('n', "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
+vim.keymap.set('n', "<leader>e", function() Snacks.picker.explorer() end, { desc = "File Explorer" })
 
 -- Setup treesitter
 local ts = require('nvim-treesitter')
@@ -57,14 +63,19 @@ local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
   'zig', 'haskell', 'toml', 'python', 'markdown', 'make',
   'cpp', 'slang', 'nix', 'gleam', 'bash', 'svelte', 'typescript',
-  'xml', 'glsl',
+  'xml', 'glsl', 'erlang', 'jsx', 'tsx'
 }
 vim.filetype.add({
   extension = {
     slang = "slang",
+    jrag = 'jastadd',
+    jadd = 'jastadd',
+    ast = 'jastadd',
+    flex = 'jflex',
+    jflex = 'jflex',
+    beaver = 'beaver',
   },
 })
-
 ts.install(tslangs)
 vim.api.nvim_create_autocmd('FileType', {
   pattern = tslangs,
@@ -127,11 +138,19 @@ vim.lsp.config("zls", {
 })
 vim.lsp.enable("zls")
 
+-- Setup erlang language platform
+vim.lsp.config("elp", {})
+vim.lsp.enable("elp")
+
 -- Setup python
 vim.lsp.config("pylsp", {})
 vim.lsp.enable("pylsp")
 vim.lsp.config("pyright", {})
 vim.lsp.enable("pyright")
+
+-- Setup glsl
+vim.lsp.config("glsl_analyzer", {})
+vim.lsp.enable("glsl_analyzer")
 
 -- Setup C LSP
 vim.lsp.config("clangd", {
