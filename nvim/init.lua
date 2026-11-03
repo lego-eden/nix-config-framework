@@ -63,8 +63,9 @@ local tslangs = {
   'lua', 'scala', 'java', 'html', 'c', 'rust', 'javascript',
   'zig', 'haskell', 'toml', 'python', 'markdown', 'make',
   'cpp', 'slang', 'nix', 'gleam', 'bash', 'svelte', 'typescript',
-  'xml', 'glsl', 'erlang', 'jsx', 'tsx'
+  'xml', 'glsl', 'erlang',
 }
+local extralangs = { 'javascriptreact', 'typescriptreact' }
 vim.filetype.add({
   extension = {
     slang = "slang",
@@ -74,19 +75,20 @@ vim.filetype.add({
     flex = 'jflex',
     jflex = 'jflex',
     beaver = 'beaver',
+    
   },
 })
 ts.install(tslangs)
 vim.api.nvim_create_autocmd('FileType', {
   pattern = tslangs,
-  callback = function()
-    -- syntax highlighting, provided by Neovim
+  callback = function(ev)
     vim.treesitter.start()
-    -- folds, provided by Neovim
-    -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    -- vim.wo.foldmethod = 'expr'
-    -- indentation, provided by nvim-treesitter
-    -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = extralangs,
+  callback = function(ev)
+    vim.treesitter.start()
   end,
 })
 
@@ -141,6 +143,10 @@ vim.lsp.enable("zls")
 -- Setup erlang language platform
 vim.lsp.config("elp", {})
 vim.lsp.enable("elp")
+
+-- Setup haskell
+vim.lsp.config("hls", {})
+vim.lsp.enable("hls")
 
 -- Setup python
 vim.lsp.config("pylsp", {})
