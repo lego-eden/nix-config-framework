@@ -3,6 +3,13 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { self, config, lib, pkgs, ... }:
+let
+  customScript = name: pkgs.writeShellApplication {
+    name = name;
+    text = lib.fileContents ./scripts/${name}.sh;
+    excludeShellChecks = [ "SC2029" ];
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -110,6 +117,7 @@
     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
+      (customScript "rrun")
     ];
   };
 
